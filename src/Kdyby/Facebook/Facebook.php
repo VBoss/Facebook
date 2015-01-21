@@ -12,7 +12,6 @@ namespace Kdyby\Facebook;
 
 use Kdyby\Facebook\Api\CurlClient;
 use Nette;
-use Nette\Utils\ArrayHash;
 
 
 
@@ -53,12 +52,12 @@ class Facebook extends Nette\Object
 	protected $apiClient;
 
 	/**
-	 * @var \Nette\Http\IResponse
+	 * @var \Nette\Http\Response
 	 */
 	protected $httpResponse;
 
 	/**
-	 * @var \Nette\Http\IRequest
+	 * @var \Nette\Http\Request
 	 */
 	protected $httpRequest;
 
@@ -105,7 +104,7 @@ class Facebook extends Nette\Object
 	 */
 	public function __construct(
 		Configuration $config, SessionStorage $session, ApiClient $client,
-		Nette\Http\IRequest $httpRequest, Nette\Http\IResponse $httpResponse)
+		Nette\Http\Request $httpRequest, Nette\Http\Response $httpResponse)
 	{
 		$this->config = $config;
 		$this->httpResponse = $httpResponse;
@@ -162,7 +161,7 @@ class Facebook extends Nette\Object
 	 * @param string $method
 	 * @param array $params
 	 * @throws \Kdyby\Facebook\FacebookApiException
-	 * @return ArrayHash|bool|NULL The decoded response
+	 * @return \Nette\ArrayHash|bool|NULL The decoded response
 	 */
 	public function api($pathOrParams, $method = NULL, array $params = array())
 	{
@@ -173,7 +172,7 @@ class Facebook extends Nette\Object
 			$response = $this->apiClient->graph($pathOrParams, $method, $params);
 		}
 
-		return !is_scalar($response) ? ArrayHash::from($response) : $response;
+		return !is_scalar($response) ? Nette\ArrayHash::from($response) : $response;
 	}
 
 

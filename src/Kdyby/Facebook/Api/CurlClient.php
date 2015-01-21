@@ -13,7 +13,7 @@ namespace Kdyby\Facebook\Api;
 use Kdyby\CurlCaBundle\CertificateHelper;
 use Kdyby\Facebook;
 use Nette;
-use Tracy\Debugger;
+use Nette\Diagnostics\Debugger;
 use Nette\Http\UrlScript;
 use Nette\Utils\Json;
 use Nette\Utils\Strings;

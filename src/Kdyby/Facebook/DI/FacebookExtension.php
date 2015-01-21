@@ -15,6 +15,16 @@ use Nette;
 use Nette\Utils\Validators;
 
 
+if (!class_exists('Nette\DI\CompilerExtension')) {
+	class_alias('Nette\Config\CompilerExtension', 'Nette\DI\CompilerExtension');
+	class_alias('Nette\Config\Compiler', 'Nette\DI\Compiler');
+	class_alias('Nette\Config\Helpers', 'Nette\DI\Config\Helpers');
+}
+
+if (isset(Nette\Loaders\NetteLoader::getInstance()->renamed['Nette\Configurator']) || !class_exists('Nette\Configurator')) {
+	unset(Nette\Loaders\NetteLoader::getInstance()->renamed['Nette\Configurator']); // fuck you
+	class_alias('Nette\Config\Configurator', 'Nette\Configurator');
+}
 
 /**
  * @author Filip Procházka <filip@prochazka.su>
@@ -71,16 +81,16 @@ class FacebookExtension extends Nette\DI\CompilerExtension
 			->addSetup('$trustForwarded', array($config['trustForwarded']))
 			->addSetup('$permissions', array($config['permissions']))
 			->addSetup('$canvasBaseUrl', array($config['canvasBaseUrl']))
-			->addSetup('$graphVersion', array($config['graphVersion']))
-			->setInject(FALSE);
+			->addSetup('$graphVersion', array($config['graphVersion']));
+			//->setInject(FALSE);
 
 		if ($config['domains']) {
 			$configurator->addSetup('$service->domains = ? + $service->domains', array($config['domains']));
 		}
 
 		$builder->addDefinition($this->prefix('session'))
-			->setClass('Kdyby\Facebook\SessionStorage')
-			->setInject(FALSE);
+			->setClass('Kdyby\Facebook\SessionStorage');
+			//->setInject(FALSE);
 
 		foreach ($config['curlOptions'] as $option => $value) {
 			if (defined($option)) {
@@ -92,20 +102,20 @@ class FacebookExtension extends Nette\DI\CompilerExtension
 		$apiClient = $builder->addDefinition($this->prefix('apiClient'))
 			->setFactory('Kdyby\Facebook\Api\CurlClient')
 			->setClass('Kdyby\Facebook\ApiClient')
-			->addSetup('$service->curlOptions = ?;', array($config['curlOptions']))
-			->setInject(FALSE);
+			->addSetup('$service->curlOptions = ?;', array($config['curlOptions']));
+			//->setInject(FALSE);
 
 		if ($config['debugger']) {
 			$builder->addDefinition($this->prefix('panel'))
-				->setClass('Kdyby\Facebook\Diagnostics\Panel')
-				->setInject(FALSE);
+				->setClass('Kdyby\Facebook\Diagnostics\Panel');
+				//->setInject(FALSE);
 
 			$apiClient->addSetup($this->prefix('@panel') . '::register', array('@self'));
 		}
 
 		$builder->addDefinition($this->prefix('client'))
-			->setClass('Kdyby\Facebook\Facebook')
-			->setInject(FALSE);
+			->setClass('Kdyby\Facebook\Facebook');
+			//->setInject(FALSE);
 
 		if ($config['clearAllWithLogout']) {
 			$builder->getDefinition('user')

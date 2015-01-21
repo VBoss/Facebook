@@ -14,8 +14,7 @@ use Kdyby\Facebook;
 use Kdyby\Facebook\Api\CurlClient;
 use Nette;
 use Nette\Utils\Html;
-use Tracy\Debugger;
-use Tracy\IBarPanel;
+use Nette\Diagnostics\Debugger;
 
 
 
@@ -26,7 +25,7 @@ use Tracy\IBarPanel;
  * @property callable $failure
  * @property callable $success
  */
-class Panel extends Nette\Object implements IBarPanel
+class Panel extends Nette\Object implements Nette\Diagnostics\IBarPanel
 {
 
 	/**
@@ -76,9 +75,9 @@ class Panel extends Nette\Object implements IBarPanel
 
 		ob_start();
 		$esc = callback('Nette\Templating\Helpers::escapeHtml');
-		$click = class_exists('\Tracy\Dumper')
-			? function ($o, $c = FALSE) { return \Tracy\Dumper::toHtml($o, array('collapse' => $c)); }
-			: callback('\Tracy\Helpers::clickableDump');
+		$click = class_exists('Nette\Diagnostics\Dumper')
+			? function ($o, $c = FALSE) { return Nette\Diagnostics\Dumper::toHtml($o, array('collapse' => $c)); }
+			: callback('Nette\Diagnostics\Helpers::clickableDump');
 		$totalTime = $this->totalTime ? sprintf('%0.3f', $this->totalTime * 1000) . ' ms' : 'none';
 
 		require __DIR__ . '/panel.phtml';
@@ -159,7 +158,7 @@ class Panel extends Nette\Object implements IBarPanel
 		$client->onError[] = $this->failure;
 		$client->onSuccess[] = $this->success;
 
-		Debugger::getBar()->addPanel($this);
+		Debugger::$bar->addPanel($this);
 	}
 
 }

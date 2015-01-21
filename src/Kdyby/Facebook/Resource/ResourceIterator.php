@@ -13,7 +13,7 @@ namespace Kdyby\Facebook\Resource;
 use Iterator;
 use IteratorIterator;
 use Nette\Object;
-use Nette\Utils\ArrayHash;
+use Nette\ArrayHash;
 
 
 

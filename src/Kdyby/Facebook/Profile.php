@@ -11,7 +11,7 @@
 namespace Kdyby\Facebook;
 
 use Nette;
-use Nette\Utils\ArrayHash;
+use Nette\ArrayHash;
 
 
 

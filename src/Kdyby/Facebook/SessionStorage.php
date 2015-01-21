@@ -11,7 +11,6 @@
 namespace Kdyby\Facebook;
 
 use Nette;
-use Tracy\Debugger;
 
 
 
