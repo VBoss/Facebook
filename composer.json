@@ -1,15 +1,15 @@
 {
-	"name": "kdyby/facebook",
+	"name": "VBoss/facebook",
 	"type": "library",
-	"description": "Facebook PHP SDK with authorization for Nette Framework",
+	"description": "Facebook PHP SDK with authorization for Nette Framework 2.0",
 	"keywords": ["nette", "facebook", "sdk"],
-	"homepage": "http://kdyby.org",
+	"homepage": "https://github.com/VBoss/Facebook",
 	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
 	"authors": [
 		{
-			"name": "Filip Procházka",
-			"homepage": "http://filip-prochazka.com",
-			"email": "filip@prochazka.su"
+			"name": "Václav Čevela",
+			"homepage": "http://spameri.cz",
+			"email": "spamer@spameri.cz"
 		},
 		{
 			"name": "Facebook",
@@ -23,8 +23,8 @@
 		"ext-json": "*"
 	},
 	"support": {
-		"email": "filip@prochazka.su",
-		"issues": "https://github.com/kdyby/facebook/issues"
+		"email": "spamer@spameri.cz",
+		"issues": "https://github.com/vboss/facebook/issues"
 	},
 	"autoload": {
 		"psr-0": {
