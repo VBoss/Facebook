@@ -1,5 +1,5 @@
 {
-	"name": "VBoss/facebook",
+	"name": "vboss/facebook",
 	"type": "library",
 	"description": "Facebook PHP SDK with authorization for Nette Framework 2.0",
 	"keywords": ["nette", "facebook", "sdk"],
